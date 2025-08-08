@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的主題網頁</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f4f4f4;
+        }
+        .navbar {
+            background: #3498db;
+            color: #fff;
+            padding: 16px 0;
+            text-align: center;
+        }
+        .navbar a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 18px;
+            font-size: 18px;
+        }
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+        .theme-title {
+            background: #fff;
+            margin: 0;
+            padding: 32px 0 16px 0;
+            text-align: center;
+            font-size: 2.2em;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+        .image-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 24px;
+            background: #fff;
+            padding: 24px 0;
+        }
+        .image-row img {
+            width: 180px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+        }
+        .fake-article {
+            background: #fff;
+            max-width: 800px;
+            margin: 32px auto 0 auto;
+            padding: 32px 28px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            font-size: 1.15em;
+            color: #333;
+            line-height: 1.8;
+        }
+        .about-us {
+            background: #f9fafb;
+            max-width: 800px;
+            margin: 32px auto 0 auto;
+            padding: 28px 24px 18px 24px;
+            border-radius: 10px;
+            box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+            font-size: 1.1em;
+            color: #222;
+            line-height: 1.7;
+            text-align: center;
+        }
+        .about-us h2 {
+            margin-top: 0;
+            color: #3498db;
+        }
+        @media (max-width: 800px) {
+            .image-row {
+                flex-direction: column;
+                gap: 16px;
+            }
+            .image-row img {
+                width: 90vw;
+                height: 30vw;
+                max-width: 320px;
+                max-height: 180px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 第一行：選單 -->
+    <nav class="navbar">
+        <a href="#">首頁</a>
+        <a href="#about">關於我們</a>
+        <a href="#gallery">圖庫</a>
+        <a href="#contact">聯絡我們</a>
+    </nav>
+    <!-- 第二行：主題 -->
+    <div class="theme-title">我的主題網頁</div>
+    <!-- 關於我們區塊 -->
+    <div class="about-us" id="about">
+        <h2>關於我們</h2>
+        <p>我們是一家專業的圖片設計公司，擁有經驗豐富的設計團隊，專注於為客戶提供創意且高品質的視覺設計服務。我們的服務範圍涵蓋商業廣告設計、品牌形象塑造、社群媒體圖像、產品包裝設計等。<br><br>我們相信設計不僅僅是美觀，更是品牌價值與理念的展現。無論是企業還是個人專案，我們都能根據您的需求，量身打造最適合的設計方案，協助您在市場中脫穎而出。<br><br>選擇我們，讓您的想法成真，讓您的品牌更具吸引力！</p>
+    </div>
+    <!-- 第三行：四個假圖 -->
+    <div class="image-row">
+        <img src="img/001.png" alt="假圖1">
+        <img src="img/002.png" alt="假圖2">
+        <img src="img/003.png" alt="假圖3">
+        <img src="img/004.png" alt="假圖4">
+    </div>
+    <!-- 第四行：一篇假文 -->
+    <div class="fake-article">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque euismod, nisi eu consectetur consectetur, nisl nisi consectetur nisi, eu consectetur nisl nisi euismod nisi. Sed euismod, nisl nisi consectetur nisi, eu consectetur nisl nisi euismod nisi. Pellentesque euismod, nisi eu consectetur consectetur, nisl nisi consectetur nisi, eu consectetur nisl nisi euismod nisi. Sed euismod, nisl nisi consectetur nisi, eu consectetur nisl nisi euismod nisi.
+    </div>
+</body>
+</html>

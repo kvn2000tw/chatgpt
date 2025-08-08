@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>四個卡片範例 - 假連結</title>
+  <style>
+    body {
+      font-family: "微軟正黑體", sans-serif;
+      background-color: #f5f5f5;
+      margin: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: repeat(2, 300px);
+      grid-gap: 20px;
+    }
+
+    /* 將卡片設為連結 */
+    .card-link {
+      text-decoration: none; /* 移除超連結底線 */
+      color: inherit; /* 繼承文字顏色 */
+      display: block;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      background-color: #fff;
+      padding: 20px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .card-link:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+    }
+
+    .card-link h2 {
+      margin-top: 0;
+      color: #333;
+      font-size: 1.5rem;
+    }
+
+    .card-link p {
+      color: #666;
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="網頁製作/index.html" class="card-link">
+      <h2>KL</h2>
+      <p>我的主題網頁</p>
+    </a>
+    <a href="文件/menu_page.html" class="card-link">
+      <h2>JACK</h2>
+      <p>歡迎來到我們的網站！</p>
+    </a>
+    <a href="#" class="card-link">
+      <h2>欸嘿</h2>
+      <p>我的網站</p>
+    </a>
+    <a href="網頁設計/index.html" class="card-link">
+      <h2>Ivy</h2>
+      <p>圓益行產品介紹</p>
+    </a>
+    <a href="旅遊目錄/index.html" class="card-link">
+      <h2>vivlan</h2>
+      <p>太魯閣遊遊網站</p>
+    </a>
+  </div>
+</body>
+</html>

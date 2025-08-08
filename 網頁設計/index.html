@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>圓益行產品介紹</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Noto Serif TC', '微軟正黑體', serif;
+      margin: 0;
+      background: #f5f3e7 url('https://www.transparenttextures.com/patterns/wood-pattern.png');
+      color: #3e2c18;
+    }
+    header {
+      background: linear-gradient(90deg, #e9d8a6 0%, #b7b7a4 100%);
+      color: #7c3f00;
+      padding: 2rem 1rem 1rem 1rem;
+      text-align: center;
+      border-bottom: 6px solid #a98467;
+      font-family: 'Noto Serif TC', serif;
+    }
+    header h1 {
+      margin: 0 0 0.5rem 0;
+      font-size: 2.7rem;
+      letter-spacing: 0.2em;
+      font-weight: 700;
+      text-shadow: 1px 2px 0 #fffbe7;
+    }
+    header p {
+      margin: 0;
+      font-size: 1.2rem;
+      font-weight: 500;
+    }
+    .container {
+      max-width: 1100px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+    .intro {
+      background: rgba(255,255,255,0.93);
+      border-radius: 14px;
+      border: 2px solid #b08968;
+      padding: 1.5rem 1.2rem;
+      margin-bottom: 2.5rem;
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: #5c4326;
+      font-family: 'Noto Serif TC', serif;
+      box-shadow: 0 2px 8px rgba(174, 142, 104, 0.07);
+    }
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+    .product-card {
+      background: rgba(255,255,255,0.95);
+      border-radius: 18px 18px 8px 8px;
+      border: 2px solid #b08968;
+      box-shadow: 0 2px 12px rgba(174, 142, 104, 0.08);
+      padding: 1.5rem 1rem 1.5rem 1rem;
+      text-align: center;
+      position: relative;
+      font-family: 'Noto Serif TC', serif;
+      transition: box-shadow 0.2s, border-color 0.2s;
+    }
+    .product-card:hover {
+      box-shadow: 0 6px 24px rgba(174, 142, 104, 0.18);
+      border-color: #7c3f00;
+    }
+    .product-card img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin-bottom: 1rem;
+      border: 3px solid #e9d8a6;
+      background: #f5f3e7;
+    }
+    .product-card h2 {
+      margin: 0.5rem 0 0.3rem 0;
+      font-size: 1.4rem;
+      color: #7c3f00;
+      letter-spacing: 0.1em;
+      font-weight: 700;
+    }
+    .product-card p {
+      font-size: 1rem;
+      color: #5c4326;
+      margin-bottom: 1.2rem;
+    }
+    .order-btn {
+      background: linear-gradient(90deg, #b08968 0%, #e9d8a6 100%);
+      color: #fff;
+      font-family: 'Noto Serif TC', serif;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 24px;
+      padding: 0.5rem 2.2rem;
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(174, 142, 104, 0.13);
+      letter-spacing: 0.15em;
+      transition: background 0.2s, color 0.2s;
+    }
+    .order-btn:hover {
+      background: linear-gradient(90deg, #7c3f00 0%, #b08968 100%);
+      color: #fffbe7;
+    }
+    /* 購物車按鈕 */
+    .cart-btn {
+      position: fixed;
+      bottom: 32px;
+      right: 32px;
+      background: #7c3f00;
+      color: #fffbe7;
+      border: none;
+      border-radius: 50px;
+      padding: 0.7rem 1.7rem;
+      font-size: 1.1rem;
+      font-family: 'Noto Serif TC', serif;
+      box-shadow: 0 2px 8px rgba(124,63,0,0.13);
+      cursor: pointer;
+      z-index: 1100;
+      letter-spacing: 0.1em;
+      transition: background 0.2s;
+    }
+    .cart-btn:hover {
+      background: #b08968;
+      color: #fff;
+    }
+    .cart-count {
+      background: #e63946;
+      color: #fff;
+      border-radius: 50%;
+      padding: 0.1em 0.6em;
+      font-size: 0.9em;
+      margin-left: 0.5em;
+    }
+    /* 彈窗 */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0; top: 0; width: 100vw; height: 100vh;
+      background: rgba(0,0,0,0.25);
+      justify-content: center;
+      align-items: center;
+    }
+    .modal.active {
+      display: flex;
+    }
+    /* 購物車 Modal 右下角浮動顯示 */
+    #cartModal.modal.active {
+      align-items: flex-end;
+      justify-content: flex-end;
+      padding: 0 2vw 2vw 0;
+    }
+    #cartModal .modal-content {
+      min-width: 320px;
+      max-width: 380px;
+      margin: 0;
+      border-radius: 18px 18px 12px 12px;
+      box-shadow: 0 8px 32px rgba(124,63,0,0.18);
+    }
+    .modal-content {
+      background: #fffbe7;
+      border-radius: 16px;
+      padding: 2rem 1.5rem 1.5rem 1.5rem;
+      min-width: 320px;
+      max-width: 95vw;
+      box-shadow: 0 4px 32px rgba(124,63,0,0.13);
+      border: 2px solid #b08968;
+      font-family: 'Noto Serif TC', serif;
+      position: relative;
+    }
+    .modal-content h3 {
+      margin-top: 0;
+      color: #7c3f00;
+      font-size: 1.3rem;
+      letter-spacing: 0.1em;
+      text-align: center;
+    }
+    .modal-content label {
+      display: block;
+      margin: 0.7rem 0 0.2rem 0;
+      color: #5c4326;
+      font-size: 1rem;
+    }
+    .modal-content input, .modal-content textarea, .modal-content select {
+      width: 100%;
+      padding: 0.4rem;
+      border-radius: 6px;
+      border: 1px solid #b7b7a4;
+      font-size: 1rem;
+      font-family: 'Noto Serif TC', serif;
+      margin-bottom: 0.5rem;
+      background: #fff;
+    }
+    .modal-content textarea {
+      resize: vertical;
+      min-height: 60px;
+    }
+    .modal-content .modal-actions {
+      text-align: right;
+      margin-top: 1rem;
+    }
+    .modal-content button {
+      font-family: 'Noto Serif TC', serif;
+      font-size: 1rem;
+      border: none;
+      border-radius: 18px;
+      padding: 0.4rem 1.5rem;
+      margin-left: 0.5rem;
+      cursor: pointer;
+      background: #b08968;
+      color: #fff;
+      transition: background 0.2s;
+    }
+    .modal-content button:hover {
+      background: #7c3f00;
+    }
+    .close-btn {
+      position: absolute;
+      right: 1rem;
+      top: 1rem;
+      background: none;
+      color: #7c3f00;
+      font-size: 1.3rem;
+      border: none;
+      cursor: pointer;
+    }
+    /* 購物車內容 */
+    .cart-list {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 1rem;
+    }
+    .cart-list th, .cart-list td {
+      border-bottom: 1px solid #b7b7a4;
+      padding: 0.5em 0.7em;
+      text-align: center;
+      font-size: 1rem;
+    }
+    .cart-list th {
+      background: #e9d8a6;
+      color: #7c3f00;
+    }
+    .cart-list td {
+      background: #fff;
+      color: #3e2c18;
+    }
+    .cart-total {
+      text-align: right;
+      font-size: 1.1rem;
+      color: #7c3f00;
+      margin-bottom: 1rem;
+    }
+    .remove-btn {
+      background: #e63946;
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      padding: 0.2em 1em;
+      cursor: pointer;
+      font-size: 0.95em;
+      margin: 0;
+    }
+    .remove-btn:hover {
+      background: #b08968;
+    }
+    footer {
+      background: #7c3f00;
+      color: #fffbe7;
+      text-align: center;
+      padding: 1.5rem 1rem;
+      font-size: 1rem;
+      letter-spacing: 0.05em;
+      border-top: 6px solid #b08968;
+      font-family: 'Noto Serif TC', serif;
+    }
+    @media (max-width: 600px) {
+      header h1 { font-size: 2rem; }
+      .container { padding: 0 0.5rem; }
+      .modal-content { min-width: 90vw; }
+      .cart-btn { right: 10px; bottom: 10px; padding: 0.5rem 1.2rem; }
+      #cartModal .modal-content {
+        min-width: 90vw;
+        max-width: 98vw;
+        border-radius: 16px;
+      }
+      #cartModal.modal.active {
+        align-items: flex-end;
+        justify-content: center;
+        padding: 0 0 2vw 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="ing/圓益.jpg" alt="圓益行 Logo" style="height:60px;display:block;margin:0 auto 1rem auto;">
+    <h1>圓益行產品介紹</h1>
+    <p>專營各式茶葉、咖啡、南北貨，品質保證，誠信經營。</p>
+  </header>
+  <button class="cart-btn" onclick="openCartModal()">購物車 <span class="cart-count" id="cartCount">0</span></button>
+  <div class="container">
+    <section class="intro">
+      <h2 style="color:#7c3f00;font-family:'Noto Serif TC',serif;">圓益行的由來</h2>
+      <p>圓益行有限公司創立於民國初年，源自家族對茶葉與南北貨的熱愛與傳承。早期以販售各式茶葉、乾貨為主，秉持「誠信、品質、服務」的經營理念，逐步拓展至咖啡、穀物等多元產品。多年來，圓益行堅持嚴選原料，注重顧客體驗，成為在地信賴的南北貨專家。無論是傳統茶品還是現代飲品，皆以專業與熱情，為顧客帶來最純粹的美味與健康。</p>
+    </section>
+    <section class="products">
+      <div class="product-card">
+        <img src="ing/紅茶.jpg" alt="紅茶">
+        <h2>紅茶</h2>
+        <p>嚴選斯里蘭卡、台灣等地優質紅茶，香氣濃郁，適合熱飲或冷泡。</p>
+        <button class="order-btn" onclick="openOrderModal('紅茶')">訂貨</button>
+      </div>
+      <div class="product-card">
+        <img src="ing/綠茶.jpg" alt="綠茶">
+        <h2>綠茶</h2>
+        <p>清新回甘，富含茶多酚，適合日常飲用，健康又解渴。</p>
+        <button class="order-btn" onclick="openOrderModal('綠茶')">訂貨</button>
+      </div>
+      <div class="product-card">
+        <img src="ing/麥茶.jpg" alt="麥茶">
+        <h2>麥茶</h2>
+        <p>以精選大麥烘焙而成，無咖啡因，香氣濃郁，適合全家大小。</p>
+        <button class="order-btn" onclick="openOrderModal('麥茶')">訂貨</button>
+      </div>
+      <div class="product-card">
+        <img src="ing/決明子.jpg" alt="決明子">
+        <h2>決明子</h2>
+        <p>天然決明子，沖泡簡單，清涼退火，是夏日消暑聖品。</p>
+        <button class="order-btn" onclick="openOrderModal('決明子')">訂貨</button>
+      </div>
+      <div class="product-card">
+        <img src="ing/奶精粉.jpg" alt="咖啡及奶精">
+        <h2>咖啡及奶精</h2>
+        <p>提供各式咖啡豆、即溶咖啡及奶精，香醇濃郁，滿足不同口味需求。</p>
+        <button class="order-btn" onclick="openOrderModal('咖啡及奶精')">訂貨</button>
+      </div>
+    </section>
+    <section>
+      <h2 style="color:#7c3f00;font-family:'Noto Serif TC',serif;">聯絡我們</h2>
+      <p>公司名稱：圓益行有限公司</p>
+      <p>地址：台北市南港區致富路888號</p>
+      <p>電話：02-888-8888</p>
+    </section>
+  </div>
+  <!-- 訂購表單 Modal -->
+  <div class="modal" id="orderModal">
+    <div class="modal-content">
+      <button class="close-btn" onclick="closeOrderModal()">&times;</button>
+      <h3>產品訂購</h3>
+      <form id="orderForm" onsubmit="addToCart(event)">
+        <label for="orderProduct">產品</label>
+        <select id="orderProduct" name="product" required onchange="updateOrderPrice()">
+          <option value="紅茶">紅茶</option>
+          <option value="綠茶">綠茶</option>
+          <option value="麥茶">麥茶</option>
+          <option value="決明子">決明子</option>
+          <option value="咖啡及奶精">咖啡及奶精</option>
+        </select>
+        <label for="orderPrice">單價</label>
+        <input type="text" id="orderPrice" name="price" readonly>
+        <label for="orderQty">數量</label>
+        <input type="number" id="orderQty" name="qty" min="1" value="1" required onchange="updateOrderPrice()" oninput="updateOrderPrice()">
+        <div style="margin:0.7rem 0 0.2rem 0;color:#5c4326;font-size:1rem;">金額：<span id="orderAmount">0</span> 元</div>
+        <div class="modal-actions">
+          <button type="button" onclick="closeOrderModal()">取消</button>
+          <button type="submit">加入購物車</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <!-- 購物車 Modal -->
+  <div class="modal" id="cartModal">
+    <div class="modal-content">
+      <button class="close-btn" onclick="closeCartModal()">&times;</button>
+      <h3>購物車</h3>
+      <div id="cartListWrap"></div>
+      <div class="cart-total" id="cartTotal"></div>
+      <form id="checkoutForm" onsubmit="submitOrder(event)">
+        <label for="checkoutName">姓名</label>
+        <input type="text" id="checkoutName" name="name" required>
+        <label for="checkoutPhone">電話</label>
+        <input type="tel" id="checkoutPhone" name="phone" required pattern="[0-9\-]{7,15}">
+        <div class="modal-actions">
+          <button type="button" onclick="closeCartModal()">取消</button>
+          <button type="submit">結帳</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <footer>
+    公司名稱：圓益行有限公司｜地址：台北市南港區致富路888號｜電話：02-888-8888<br>
+    版權所有，翻印必究！<br>
+    &copy; 2024 圓益行有限公司
+  </footer>
+  <script>
+    // 產品單價設定
+    const productPrices = {
+      '紅茶': 200,
+      '綠茶': 180,
+      '麥茶': 150,
+      '決明子': 120,
+      '咖啡及奶精': 250
+    };
+    // 購物車資料
+    let cart = [];
+    // 訂購彈窗控制
+    function openOrderModal(product) {
+      document.getElementById('orderModal').classList.add('active');
+      document.getElementById('orderProduct').value = product;
+      document.getElementById('orderQty').value = 1;
+      updateOrderPrice();
+    }
+    function closeOrderModal() {
+      document.getElementById('orderModal').classList.remove('active');
+      document.getElementById('orderForm').reset();
+      document.getElementById('orderAmount').textContent = '0';
+    }
+    // 訂購金額即時更新
+    function updateOrderPrice() {
+      const product = document.getElementById('orderProduct').value;
+      const price = productPrices[product] || 0;
+      const qty = parseInt(document.getElementById('orderQty').value) || 1;
+      document.getElementById('orderPrice').value = price + ' 元';
+      document.getElementById('orderAmount').textContent = price * qty;
+    }
+    // 加入購物車
+    function addToCart(e) {
+      e.preventDefault();
+      const product = document.getElementById('orderProduct').value;
+      const price = productPrices[product] || 0;
+      const qty = parseInt(document.getElementById('orderQty').value) || 1;
+      // 若購物車已有該商品則合併數量
+      const idx = cart.findIndex(item => item.product === product);
+      if (idx > -1) {
+        cart[idx].qty += qty;
+      } else {
+        cart.push({ product, price, qty });
+      }
+      updateCartCount();
+      closeOrderModal();
+      alert('已加入購物車！');
+    }
+    // 購物車彈窗控制
+    function openCartModal() {
+      renderCart();
+      document.getElementById('cartModal').classList.add('active');
+    }
+    function closeCartModal() {
+      document.getElementById('cartModal').classList.remove('active');
+      document.getElementById('checkoutForm').reset();
+    }
+    // 購物車渲染
+    function renderCart() {
+      const cartListWrap = document.getElementById('cartListWrap');
+      if (cart.length === 0) {
+        cartListWrap.innerHTML = '<p style="text-align:center;color:#b08968;">購物車內尚無商品</p>';
+        document.getElementById('cartTotal').textContent = '';
+        document.getElementById('checkoutForm').style.display = 'none';
+        return;
+      }
+      let html = '<table class="cart-list"><tr><th>產品</th><th>單價</th><th>數量</th><th>小計</th><th>操作</th></tr>';
+      let total = 0;
+      cart.forEach((item, i) => {
+        const subtotal = item.price * item.qty;
+        total += subtotal;
+        html += `<tr><td>${item.product}</td><td>${item.price}</td><td>${item.qty}</td><td>${subtotal}</td><td><button class='remove-btn' onclick='removeCartItem(${i})'>移除</button></td></tr>`;
+      });
+      html += '</table>';
+      cartListWrap.innerHTML = html;
+      document.getElementById('cartTotal').textContent = '總金額：' + total + ' 元';
+      document.getElementById('checkoutForm').style.display = 'block';
+    }
+    // 移除購物車商品
+    function removeCartItem(idx) {
+      cart.splice(idx, 1);
+      renderCart();
+      updateCartCount();
+    }
+    // 購物車數量顯示
+    function updateCartCount() {
+      let count = 0;
+      cart.forEach(item => count += item.qty);
+      document.getElementById('cartCount').textContent = count;
+    }
+    // 結帳送出
+    function submitOrder(e) {
+      e.preventDefault();
+      if (cart.length === 0) {
+        alert('購物車內無商品！');
+        return;
+      }
+      // 這裡可串接後端API，暫以alert顯示
+      closeCartModal();
+      cart = [];
+      updateCartCount();
+      alert('訂購成功，專人將與您聯繫！');
+    }
+    // 初始化
+    window.onload = function() {
+      updateOrderPrice();
+      updateCartCount();
+    };
+  </script>
+</body>
+</html>

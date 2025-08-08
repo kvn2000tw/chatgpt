@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <title>最新消息 - 今日天氣</title>
+    <style>
+        body {
+            font-family: Arial, "微軟正黑體", sans-serif;
+            background: #f5f5f5;
+            margin: 0;
+        }
+        .container {
+            max-width: 500px;
+            margin: 40px auto;
+            background: #fff;
+            padding: 32px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+        h1 {
+            color: #007bff;
+            margin-top: 0;
+        }
+        .weather {
+            font-size: 22px;
+            margin: 24px 0 12px 0;
+        }
+        .temp {
+            font-size: 48px;
+            color: #ff9800;
+            font-weight: bold;
+        }
+        .desc {
+            font-size: 20px;
+            color: #555;
+        }
+        .icon {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>今日天氣</h1>
+        <img class="icon" src="https://openweathermap.org/img/wn/01d@2x.png" alt="晴天">
+        <div class="weather">台北市</div>
+        <div class="temp">28°C</div>
+        <div class="desc">晴時多雲，舒適宜人</div>
+        <p style="margin-top:28px;color:#888;">（本資料為範例假資料）</p>
+    </div>
+</body>
+</html>
